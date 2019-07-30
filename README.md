@@ -16,6 +16,7 @@ The voters get 1 vote in the form of credit.
 For **rural areas**, an official appointed by the Election Commission will have a special account in our app which would let the official create accounts for people who lack the facilities to create an account.
 
 **Advantages of the app:**
+
 We propose this method to remove the system of voter IDs. This way, we also tackle the problem of names missing from the voters’ list.
 Three Government IDs are required and not just the Aadhar Card because Aadhar Cards of non-existent people are easily available in the black market.
 
