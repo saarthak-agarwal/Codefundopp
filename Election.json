@@ -1,0 +1,194 @@
+{
+    "ApplicationName": "Election",
+    "DisplayName": "Election",
+    "Description": "Allows voters to vote securely for the candidate of their choice.",
+    "ApplicationRoles": [
+      {
+        "Name": "ElectionCommission",
+        "Description": "Organisation which administers the election process."
+      },
+      {
+        "Name": "Voter",
+        "Description": "User who can vote."
+      }
+    ],
+    "Workflows": [
+      {
+        "Name": "Election",
+        "DisplayName": "Election",
+        "Description": "Handles the Voting process",
+        "Initiators": [ "ElectionCommission" ],
+        "StartState":  "Setup",
+        "Properties": [
+          {
+            "Name": "State",
+            "DisplayName": "State",
+            "Description": "Holds the state of the contract",
+            "Type": {
+              "Name": "state"
+            }
+          },
+          {
+            "Name": "ElectionCommission",
+            "DisplayName": "Election Commission",
+            "Description": "...",
+            "Type": {
+              "Name": "ElectionCommission"
+            }
+          },
+          {
+            "Name": "Voter",
+            "DisplayName": "Voter",
+            "Description": "...",
+            "Type": {
+              "Name": "Voter"
+            }
+          },
+          {
+            "Name": "CandidatesCount",
+            "DisplayName": "Candidates Count",
+            "Type": {
+              "Name": "int"
+            }
+          },
+          {
+            "Name": "cname",
+            "DisplayName": "Candidate name",
+            "Type": {
+              "Name": "string"
+            }
+          },
+          {
+            "Name": "candidateId",
+            "DisplayName": "Candidate ID",
+            "Type": {
+              "Name": "int"
+            }
+          },
+          {
+            "Name": "winner",
+            "DisplayName": "Winner Of the Election",
+            "Type": {
+              "Name": "string"
+            }
+          },
+          {
+            "Name": "Title",
+            "DisplayName": "Title Of Election",
+            "Type": {
+              "Name": "string"
+            }
+          }
+        ],
+        "Constructor": {
+          "Parameters": [{
+            "Name": "title",
+            "Description": "Title of the Election",
+            "DisplayName": "Title of Election",
+            "Type": {
+              "Name": "string"
+            }
+          }]
+        },
+        "Functions": [
+          {
+            "Name": "AddCandidate",
+            "DisplayName": "Add Candidate",
+            "Description": "Add a Candidate contesting for the Election",
+            "Parameters": [
+              {
+                "Name": "cname1",
+                "Description": "Name of the Candidate",
+                "DisplayName": "Name",
+                "Type": {
+                  "Name": "string"
+                }
+              }
+            ]
+          },
+          {
+            "Name": "vote",
+            "DisplayName": "Vote",
+            "Description": "Vote for a particular candidate",
+            "Parameters": [{
+                "Name": "candidateId1",
+                "Description": "Id of the Candidate",
+                "DisplayName": "Candidate ID",
+                "Type": {
+                  "Name": "int"
+                }
+              
+          }]
+          },
+          {
+            "Name": "rescalc",
+            "DisplayName": "Calculate Results",
+            "Description": "Shows who won the election",
+            "Parameters": []
+          },
+          {
+            "Name": "AllowVoting",
+            "DisplayName": "Start Voting Period",
+            "Description": "Start the voting period and allow the voters to vote",
+            "Parameters": []
+          }
+        ],
+        "States": [
+          {
+            "Name": "Setup",
+            "DisplayName": "Setup",
+            "Description": "Setting Up Candidates",
+            "PercentComplete": 20,
+            "Style": "Success",
+            "Transitions": [
+              {
+                "AllowedRoles": ["ElectionCommission"],
+                "AllowedInstanceRoles": ["ElectionCommission"],
+                "DisplayName": "Add Candidates",
+                "Function": "AddCandidate",
+                "NextStates": ["Setup"]
+              },
+              {
+                "AllowedRoles": ["ElectionCommission"],
+                "AllowedInstanceRoles": ["ElectionCommission"],
+                "DisplayName": "Start Voting Period",
+                "Function": "AllowVoting",
+                "NextStates": ["Voting"]
+              }
+            ]
+          },
+          {
+            "Name": "Voting",
+            "DisplayName": "Voting",
+            "Description": "Vote for your Candidate",
+            "PercentComplete": 60,
+            "Style": "Success",
+            "Transitions": [
+              {
+              "AllowedRoles": ["ElectionCommission"],
+              "AllowedInstanceRoles": ["ElectionCommission"],
+              "DisplayName": "Results",
+              "Function": "rescalc",
+              "NextStates": ["Result"]
+            },
+            {
+              "AllowedRoles": ["Voter"],
+              "AllowedInstanceRoles": ["Voter"],
+              "DisplayName": "Vote",
+              "Function": "vote",
+              "NextStates": ["Voting"]
+            }
+          ]
+          },
+          {
+            "Name": "Result",
+            "DisplayName": "Results",
+            "Description": "See the Results",
+            "PercentComplete": 100,
+            "Style": "Success",
+            "Transitions": []
+          }
+        ]
+      }
+    ]   
+  }
