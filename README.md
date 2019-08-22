@@ -64,8 +64,6 @@ Technically speaking, not everyone can run a full node on the private blockchain
 With permissioned blockchains, the consensus process is controlled by a pre-selected list of participants. Users can’t join without permission.
 Yes, within these kinds of blockchain networks, the participants are typically known but with our architecture, the names and the choices they make would be encrypted to prevent any kind of identity leaks.
 
-We use PBFT (Practical Byzantine Fault Tolerance) as our consensus mechanism.
-
 The vote which is given to the voters in the form of a credit, once cast, is sent to the Voted party’s account.
 
 Once the polling is over, the party with maximum credits is declared as the winner. Voters can also send their credits to the NOTA account. If NOTA credits exceed 1/3 of the votes, no absolute winner is declared.
